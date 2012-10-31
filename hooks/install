@@ -18,5 +18,5 @@ wget http://semicomplete.com/files/logstash/logstash-1.1.1-monolithic.jar
 cd /usr/local/logstash/conf.d
 echo 'input {  file {     type => "syslog"    path => "/var/log/syslog"  } }' > /usr/local/logstash/conf.d/syslog.conf
 echo 'output {  elasticsearch {    embedded => true  } }' >> /usr/local/logstash/conf.d/syslog.conf
-echo 'output { stdout { debug => true debug_format => "json"} }' >> /usr/local/logstash/conf.d/syslog.conf
+# echo 'output { stdout { debug => true debug_format => "json"} }' >> /usr/local/logstash/conf.d/syslog.conf
 cd /usr/local/logstash
