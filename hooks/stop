@@ -1,0 +1,4 @@
+#!/bin/bash
+
+juju-log "stopping logstash...  with feeling."
+killall -9 java

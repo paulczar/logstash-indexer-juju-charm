@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -eux # -x for verbose logging to juju debug-log
+juju-log "Installing required Packages via apt-get - java"
+apt-get update
+apt-get -y install default-jre-headless curl
+#juju-log "installing some gems:  haml, sass"
+#gem install haml 
+#gem install sass
+juju-log "create skeleton dir"
+mkdir -p /usr/local/logstash/bin
+mkdir -p /usr/local/logstash/conf.d
+mkdir -p /usr/local/logstash/data
+juju-log "download and install logstash and test config file"
+cd /usr/local/logstash/bin
+# using version 1.1.1 as some newer ones have some gem errors with the web search
+wget http://semicomplete.com/files/logstash/logstash-1.1.1-monolithic.jar
+cd /usr/local/logstash/conf.d
+echo 'input {  file {     type => "syslog"    path => "/var/log/syslog"  } }' > /usr/local/logstash/conf.d/syslog.conf
+echo 'output {  elasticsearch {    embedded => true  } }' >> /usr/local/logstash/conf.d/syslog.conf
+echo 'output { stdout { debug => true debug_format => "json"} }' >> /usr/local/logstash/conf.d/syslog.conf
+cd /usr/local/logstash

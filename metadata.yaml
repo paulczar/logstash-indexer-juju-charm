@@ -1,0 +1,6 @@
+name: logstash
+summary: "Logstash logging server"
+maintainer: "Paul Cz <paul@paulcz.net>"
+description: |
+  Installs the logstash logging system.   Initially stand alone version,  
+  but would like to relate to ElasticSearch, Kibana, and other stuffs.
