@@ -2,7 +2,6 @@
 juju-log "run logstash"
 cd /usr/local/logstash
 java -jar /usr/local/logstash/bin/logstash-1.1.1-monolithic.jar agent -f /usr/local/logstash/conf.d/ -- web --backend 'elasticsearch:///?local' &
-sleep 2m
 open-port 9200/tcp
 open-port 9292/tcp
 juju-log "started?"
