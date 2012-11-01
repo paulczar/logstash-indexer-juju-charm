@@ -23,6 +23,6 @@ echo 'output {  elasticsearch {    embedded => true  } }' > /usr/local/logstash/
 # the below is noisy in the juju debug-log... but useful ... can comment it out.
 echo 'output { stdout { debug => true debug_format => "json"} }' > /usr/local/logstash/conf.d/output-stdout.conf
 chown -R logstash. /usr/local/logstash
-install -o root -g root 0644 files/charm/logstash-indexer.conf /etc/init/logstash-indexer.conf
+install -o root -g root -m 0644 files/charm/logstash-indexer.conf /etc/init/logstash-indexer.conf
 touch /var/log/logstash-indexer.log
 chown logstash. /var/log/logstash-indexer.logstash
