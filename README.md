@@ -1,6 +1,6 @@
-logstash-standalone-juju-charm
+logstash-indexer-juju-charm
 ==============================
 
 Juju Charm for standalone logstash server
 
-something a bit funky with the startup...FIX!
+need to start adding more bits n bobs,  but fully working.
