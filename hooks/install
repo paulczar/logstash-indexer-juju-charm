@@ -4,25 +4,23 @@ set -eux # -x for verbose logging to juju debug-log
 juju-log "Installing required Packages via apt-get - java"
 apt-get update
 apt-get -y install default-jre-headless curl
-#juju-log "installing some gems:  haml, sass"
-#gem install haml 
-#gem install sass
+juju-log "Install upstart init script"
+install -o root -g root -m 0644 files/charm/logstash-indexer.conf /etc/init/logstash-indexer.conf
 juju-log "create logstash user"
 useradd logstash
 juju-log "create skeleton dir"
 mkdir -p /usr/local/logstash/bin
 mkdir -p /usr/local/logstash/conf.d
 mkdir -p /usr/local/logstash/data
-juju-log "download and install logstash and test config file"
-cd /usr/local/logstash/bin
+juju-log "download and install logstash and create config files"
 # using version 1.1.1 as some newer ones have some gem errors with the web search
-wget http://semicomplete.com/files/logstash/logstash-1.1.1-monolithic.jar
-cd /usr/local/logstash/conf.d
+wget -O /usr/local/logstash/bin/logstash-monolithic.jar http://semicomplete.com/files/logstash/logstash-1.1.1-monolithic.jar
 echo 'input {  file {     type => "syslog"    path => "/var/log/syslog" sincedb_path => "/usr/local/logstash" } }' > /usr/local/logstash/conf.d/input-syslog.conf
 echo 'output {  elasticsearch {    embedded => true  } }' > /usr/local/logstash/conf.d/output-embedded-es.conf
 # the below is noisy in the juju debug-log... but useful ... can comment it out.
-echo 'output { stdout { debug => true debug_format => "json"} }' > /usr/local/logstash/conf.d/output-stdout.conf
-chown -R logstash. /usr/local/logstash
-install -o root -g root -m 0644 files/charm/logstash-indexer.conf /etc/init/logstash-indexer.conf
+# echo 'output { stdout { debug => true debug_format => "json"} }' > /usr/local/logstash/conf.d/output-stdout.conf
+juju-log "create log file and pwn it"
 touch /var/log/logstash-indexer.log
-chown logstash. /var/log/logstash-indexer.logstash
+chown logstash. /var/log/logstash-indexer.log
+juju-log "Make sure logstash user owns the whole kit and kaboodle"
+chown -R logstash. /usr/local/logstash

@@ -1,6 +1,7 @@
-name: logstash
-summary: "Logstash logging server"
+name: logstash-indexer
+summary: "Logstash indexer server"
 maintainer: "Paul Cz <paul@paulcz.net>"
 description: |
-  Installs the logstash logging system.   Initially stand alone version,  
-  but would like to relate to ElasticSearch, Kibana, and other stuffs.
+  Installs the logstash indexer.   Initially stand alone version,  
+  but would like to add charms and hooks for ElasticSearch, 
+  Kibana, and other stuffs.  
