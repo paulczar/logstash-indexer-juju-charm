@@ -1,4 +1,7 @@
 #!/bin/bash
 
+HOME=`dirname $0`
+. $HOME/common.sh
+
 juju-log "stopping logstash...  with feeling."
-initctl start logstash-indexer
+initctl stop logstash-indexer

@@ -1,0 +1,33 @@
+options: 
+  version: 
+    type: string
+    default: "1.1.1"
+    description: |
+      This sets the logstash version number to be used.
+      Must update checksum if changed.
+      Be aware that elastic search version must match 
+      if using elastic search output ( default behaviour for now )
+  baseurl:
+    type: string
+    default: "http://semicomplete.com/files/logstash"
+    description: |
+      Base URL to download the monolithic JAR file from
+      In case you want to host yourself, or hosting is changed.
+  checksum: 
+    type: string
+    default: "cecabd2dda920e1ce4325cd7b22c2cca"
+    description: |
+      checksum for binary.  calculated via md5sum
+      change this if you change the version.
+  basepath:
+    type: string
+    default: "/usr/local/logstash"
+    description: |
+      base path for logstash installation
+      don't change this after installation.
+  user: 
+    type: string
+    default: "logstash"
+    description: |
+      user to run logstash as.
+      don't change this after installation.
